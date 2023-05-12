@@ -1,5 +1,6 @@
 package com.nietott.portfolio.model;
 
+import java.io.Serializable;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,7 +17,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class experience {
+public class Experience implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long expId;
 
@@ -32,5 +33,5 @@ public class experience {
     private String jobDescription;
     private String imageUrl;
 
-    public experience(){}
+    public Experience(){}
 }

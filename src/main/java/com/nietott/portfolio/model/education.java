@@ -1,5 +1,6 @@
 package com.nietott.portfolio.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -17,7 +18,7 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 
-public class education {
+public class Education implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long eduId;
 
@@ -33,5 +34,5 @@ public class education {
     private Date endDate;
     private String imageUrl;
 
-    public education(){}
+    public Education(){}
 }
