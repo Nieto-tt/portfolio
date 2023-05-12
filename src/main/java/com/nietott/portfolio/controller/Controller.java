@@ -1,39 +1,56 @@
 package com.nietott.portfolio.controller;
 
+import com.nietott.portfolio.model.SoftSkills;
+import com.nietott.portfolio.model.Users;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-import com.nietott.portfolio.model.Users;
+import com.nietott.portfolio.service.ISkillsService;
+import com.nietott.portfolio.service.ISoftSkillsService;
 import com.nietott.portfolio.service.IUserService;
 
 @RestController
-@RequestMapping("/user")
-public class UserController {
-    @Autowired
-    private IUserService service;
+public class Controller {
+    @Autowired private IUserService userService;
+    @Autowired private ISkillsService skillService;
+    @Autowired private ISoftSkillsService softService;
 
-    @PostMapping("/new")
-    public void newUser(@RequestBody Users user){
-        service.newUser(user);
+    @PostMapping("/newSoft")
+    public void newSoftSkills(@RequestBody SoftSkills SoftSkills){
+        softService.newSoftSkills(SoftSkills);
+    }
+
+    @GetMapping("/get")
+    public List<SoftSkills> getSkills(){
+        return softService.getSoftSkills();
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteSkills(@PathVariable Long id){
+        softService.deleteSoftSkills(id);
     }
 
     @GetMapping("/login/{email}/{password}")
     public ResponseEntity<String> login(@PathVariable String email, @PathVariable String password) {
         
         // Verificar si el usuario existe en la base de datos
-        Users user = service.findByEmail(email);
+        Users user = userService.findByEmail(email);
         if (user == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("El usuario no existe");
         }
@@ -45,16 +62,5 @@ public class UserController {
         
         // Si el usuario y la contraseña son correctos, se puede iniciar sesión
         return ResponseEntity.ok("Inicio de sesión exitoso");
-    }
-
-
-    @GetMapping("/get")
-    public List<Users> getUsers(){
-        return service.getUsers();
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteUser(@PathVariable Long id){
-        service.deleteUser(id);
     }
 }
