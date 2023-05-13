@@ -6,8 +6,8 @@ import lombok.Data;
 @AllArgsConstructor
 @Data
 public class skillsDTO {
-    private int skillId;
-    private int userId;
+    private Long skillId;
+    private Long userId;
     private String skillName;
     private String proficiencyLevel;
     private String icon;

@@ -29,6 +29,21 @@ public class Users {
     private int dni;
     private String surname;
     private String imageUrl;
+    public Users(Long userId, String name, @Email String email, String password, String phone, String gitUsername,
+            String linkedinUsername, int dni, String surname, String imageUrl, String bannerUrl) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.gitUsername = gitUsername;
+        this.linkedinUsername = linkedinUsername;
+        this.dni = dni;
+        this.surname = surname;
+        this.imageUrl = imageUrl;
+        this.bannerUrl = bannerUrl;
+    }
+
     private String bannerUrl;
     
 

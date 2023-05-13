@@ -3,6 +3,7 @@ package com.nietott.portfolio.service;
 import java.util.List;
 
 import com.nietott.portfolio.DTO.PortfolioDTO;
+import com.nietott.portfolio.DTO.certificationsDTO;
 import com.nietott.portfolio.DTO.educationDTO;
 import com.nietott.portfolio.DTO.experienceDTO;
 import com.nietott.portfolio.DTO.projectsDTO;
@@ -16,19 +17,21 @@ public interface IPortfolioService {
     public Users getUser();
     
     //Modificar persona
-    public boolean editarPersona(userDTO user);
+    public boolean editUser(userDTO user);
     
-    public userDTO getPersoDto();
+    public userDTO getUserDTO();
     
-    public List<educationDTO> listarEduDto();
+    public List<educationDTO> listEduDto();
     
-    public List<experienceDTO> listarExpeDto();
+    public List<experienceDTO> listExpeDto();
     
-    public List<skillsDTO> listarHabTecnicaDto();
+    public List<skillsDTO> listSkillsDTO();
     
-    public List<softskillsDTO> listarHabBlandaDto();
+    public List<softskillsDTO> listSoftDTO();
     
-    public List<projectsDTO> listarProyeDto();
+   // public List<projectsDTO> listProjectsDTO();
+
+    public List<certificationsDTO> listCertificationsDTO();
    
     //Lectura porfolio
     public PortfolioDTO getPortfolio();
