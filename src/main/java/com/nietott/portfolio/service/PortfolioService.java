@@ -89,22 +89,24 @@ public class PortfolioService implements IPortfolioService{
     public List<educationDTO> listEduDto() {
         List<Education> listEdu = educationRepository.findAll();
         List<educationDTO> listEduDto = new ArrayList<educationDTO>();
-        for (int i = 0; i < listEdu.size(); i++) {
-            Education edu = listEdu.get(i);
+        
+        for (Education edu : listEdu) {
             educationDTO eduDto = new educationDTO(edu.getEduId(), edu.getUsers().getUserId(), edu.getInstitutionName(), edu.getDegreeName(), edu.getFieldOfStudy(), edu.getStartDate(), edu.getEndDate(), edu.getImageUrl());
             listEduDto.add(eduDto);
         }
+
         return listEduDto;
     }
     @Override
     public List<experienceDTO> listExpeDto() {
         List<Experience> listExpe = experienceRepository.findAll();
-        List<experienceDTO> listExpeDto = new ArrayList<experienceDTO>();
-        for (int i = 0; i < listExpe.size(); i++) {
-            Experience expe = listExpe.get(i);
+        List<experienceDTO> listExpeDto = new ArrayList<>();
+
+        for (Experience expe : listExpe) {
             experienceDTO expeDto = new experienceDTO(expe.getExpId(), expe.getUsers().getUserId(), expe.getCompanyName(), expe.getJobTitle(), expe.getStartDate(), expe.getEndDate(), expe.getJobDescription(), expe.getImageUrl());
             listExpeDto.add(expeDto);
         }
+
         return listExpeDto;
     }
 
@@ -117,34 +119,39 @@ public class PortfolioService implements IPortfolioService{
     @Override
     public List<certificationsDTO> listCertificationsDTO() {
         List<Certifications> listCertifications = certificationsRepository.findAll();
-        List<certificationsDTO> listcertificationsDTO = new ArrayList<certificationsDTO>();
-        for (int i = 0; i < listCertifications.size(); i++) {
-            Certifications skills = listCertifications.get(i);
+        List<certificationsDTO> listcertificationsDTO = new ArrayList<>();
+        
+        for (Certifications skills : listCertifications) {
             certificationsDTO certificationsDTO = new certificationsDTO(skills.getCertId(), skills.getUsers().getUserId(), skills.getCertificationName(), skills.getInstitutionName(), skills.getDateObtained(), skills.getCertificationUrl(), skills.getImageUrl());
             listcertificationsDTO.add(certificationsDTO);
         }
+
         return listcertificationsDTO;
     }
+
     @Override
     public List<skillsDTO> listSkillsDTO() {
         List<Skills> listSkills = skillRepository.findAll();
-        List<skillsDTO> listSkillsDto = new ArrayList<skillsDTO>();
-        for (int i = 0; i < listSkills.size(); i++) {
-            Skills skills = listSkills.get(i);
+        List<skillsDTO> listSkillsDto = new ArrayList<>();
+
+        for (Skills skills : listSkills) {
             skillsDTO skillsDto = new skillsDTO(skills.getSkillId(), skills.getUsers().getUserId(), skills.getProficiencyLevel(), skills.getSkillName(), skills.getIcon());
             listSkillsDto.add(skillsDto);
         }
+
         return listSkillsDto;
     }
+
     @Override
     public List<softskillsDTO> listSoftDTO() {
         List<SoftSkills> listSoft = softSkillsRepository.findAll();
-        List<softskillsDTO> listSoftskillsDTO = new ArrayList<softskillsDTO>();
-        for (int i = 0; i < listSoft.size(); i++) {
-            SoftSkills soft = listSoft.get(i);
+        List<softskillsDTO> listSoftskillsDTO = new ArrayList<>();
+
+        for (SoftSkills soft:listSoft) {
             softskillsDTO softskillsDTO = new softskillsDTO(soft.getSoftId(), soft.getUsers().getUserId(), soft.getSkillName(), soft.getIcon());
             listSoftskillsDTO.add(softskillsDTO);
         }
+
         return listSoftskillsDTO;
     }
     
