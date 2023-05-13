@@ -1,5 +1,7 @@
 package com.nietott.portfolio.model;
 
+import java.io.Serializable;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
@@ -15,9 +17,9 @@ import lombok.Data;
 @AllArgsConstructor
 @Entity
 
-public class Skills {
+public class Skills implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int skillId;
+    private Long skillId;
 
     @JsonIgnore 
     @ManyToOne

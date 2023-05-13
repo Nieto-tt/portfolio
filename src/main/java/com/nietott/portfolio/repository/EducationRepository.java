@@ -1,5 +1,11 @@
 package com.nietott.portfolio.repository;
 
-public interface EducationRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.nietott.portfolio.model.Education;
+
+@Repository
+public interface EducationRepository extends JpaRepository <Education,Long> {
     
 }

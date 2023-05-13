@@ -1,5 +1,8 @@
 package com.nietott.portfolio.service;
 
-public class EducationService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class EducationService implements IEducationService{
     
 }

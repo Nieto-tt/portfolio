@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class UsersDTO {
+public class userDTO {
     private long userId;
     private String name;
     private String email;
@@ -17,4 +17,6 @@ public class UsersDTO {
     private String surname;
     private String imageUrl;
     private String bannerUrl;
+
+    public userDTO(){}
 }

@@ -1,5 +1,8 @@
 package com.nietott.portfolio.service;
 
-public class ProjectsService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ProjectsService implements IProjectService{
     
 }

@@ -1,5 +1,6 @@
 package com.nietott.portfolio.controller;
 
+import com.nietott.portfolio.DTO.PortfolioDTO;
 import com.nietott.portfolio.model.SoftSkills;
 import com.nietott.portfolio.model.Users;
 
@@ -21,16 +22,35 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.nietott.portfolio.service.ICertificationService;
+import com.nietott.portfolio.service.IEducationService;
+import com.nietott.portfolio.service.IExperienceService;
+import com.nietott.portfolio.service.IPortfolioService;
+import com.nietott.portfolio.service.IProjectService;
 import com.nietott.portfolio.service.ISkillsService;
 import com.nietott.portfolio.service.ISoftSkillsService;
 import com.nietott.portfolio.service.IUserService;
 
 @RestController
+//@CrossOrigin
 public class Controller {
     @Autowired private IUserService userService;
     @Autowired private ISkillsService skillService;
     @Autowired private ISoftSkillsService softService;
+    @Autowired private IExperienceService expeService;
+    @Autowired private IEducationService eduService;
+    @Autowired private ICertificationService certService;
+    @Autowired private IProjectService projectService;
+    @Autowired private IPortfolioService portfolioService;
 
+    @GetMapping ("/portfolio")
+    @ResponseBody
+    public ResponseEntity<PortfolioDTO> getPortfolio() {
+        PortfolioDTO portfolio = portfolioService.getPortfolio();
+        return new ResponseEntity<>(portfolio, HttpStatus.OK);
+    }
+
+    /* 
     @PostMapping("/newSoft")
     public void newSoftSkills(@RequestBody SoftSkills SoftSkills){
         softService.newSoftSkills(SoftSkills);
@@ -45,7 +65,7 @@ public class Controller {
     public void deleteSkills(@PathVariable Long id){
         softService.deleteSoftSkills(id);
     }
-
+ 
     @GetMapping("/login/{email}/{password}")
     public ResponseEntity<String> login(@PathVariable String email, @PathVariable String password) {
         
@@ -63,4 +83,6 @@ public class Controller {
         // Si el usuario y la contraseña son correctos, se puede iniciar sesión
         return ResponseEntity.ok("Inicio de sesión exitoso");
     }
+    */
+
 }

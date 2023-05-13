@@ -1,5 +1,8 @@
 package com.nietott.portfolio.service;
 
-public class ExperienceService {
+import org.springframework.stereotype.Service;
+
+@Service
+public class ExperienceService implements IExperienceService{
     
 }

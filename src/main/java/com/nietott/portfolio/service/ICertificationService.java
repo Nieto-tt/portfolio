@@ -1,5 +1,5 @@
 package com.nietott.portfolio.service;
 
-public class ICertificationService {
+public interface ICertificationService {
     
 }

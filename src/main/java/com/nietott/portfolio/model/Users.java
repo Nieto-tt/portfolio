@@ -18,7 +18,7 @@ import lombok.Data;
 
 public class Users {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long userId;
+    private Long userId;
     private String name;
     @Email
     private String email;
@@ -32,23 +32,23 @@ public class Users {
     private String bannerUrl;
     
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Skills> skills;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
     private List<SoftSkills> softskills;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<projects> projects;
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Projects> projects;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<certifications> certifications;
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Certifications> certifications;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<experience> experience;
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Experience> experience;
 
-    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<education> education;
+    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Education> education;
 
     // Constructor
     public Users(){}

@@ -1,5 +1,5 @@
 package com.nietott.portfolio.service;
 
-public class IEducationService {
+public interface IEducationService {
     
 }

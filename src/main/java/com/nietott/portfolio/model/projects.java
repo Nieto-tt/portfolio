@@ -1,9 +1,8 @@
 package com.nietott.portfolio.model;
 
+import java.io.Serializable;
 import java.util.Date;
-import java.util.HashSet;
-
-import org.hibernate.mapping.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -22,7 +21,7 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class projects {
+public class Projects implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long projectId;
     
@@ -38,5 +37,11 @@ public class projects {
     private String imageUrl;
     private String liveUrl;
 
-    public projects(){}
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "project_technologies",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "technology_id"))
+    private List<Technologies> technologies;
+
+    public Projects(){}
 }

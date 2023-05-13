@@ -1,5 +1,6 @@
 package com.nietott.portfolio.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -16,19 +17,20 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-public class certifications {
+public class Certifications implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int certId;
+    private long certId;
 
     @JsonIgnore
     @ManyToOne
     @JoinColumn(name="user_id")
     private Users users;
+
     private String certificationName;
     private String institutionName;
     private Date dateObtained;
     private String certificationUrl;
     private String imageUrl;
 
-    public certifications(){}
+    public Certifications(){}
 }
