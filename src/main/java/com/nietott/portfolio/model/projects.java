@@ -2,18 +2,14 @@ package com.nietott.portfolio.model;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,12 +32,6 @@ public class Projects implements Serializable{
     private Date endDate;
     private String imageUrl;
     private String liveUrl;
-
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "project_technologies",
-            joinColumns = @JoinColumn(name = "project_id"),
-            inverseJoinColumns = @JoinColumn(name = "technology_id"))
-    private List<Technologies> technologies;
 
     public Projects(){}
 }

@@ -47,22 +47,22 @@ public class Users {
     private String bannerUrl;
     
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<Skills> skills;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<SoftSkills> softskills;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<Projects> projects;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<Certifications> certifications;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<Experience> experience;
 
-    @OneToMany(mappedBy = "users",cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)
     private List<Education> education;
 
     // Constructor

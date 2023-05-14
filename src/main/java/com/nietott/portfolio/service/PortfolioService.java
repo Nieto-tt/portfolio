@@ -17,6 +17,7 @@ import com.nietott.portfolio.DTO.userDTO;
 import com.nietott.portfolio.model.Certifications;
 import com.nietott.portfolio.model.Education;
 import com.nietott.portfolio.model.Experience;
+import com.nietott.portfolio.model.Projects;
 import com.nietott.portfolio.model.Skills;
 import com.nietott.portfolio.model.SoftSkills;
 import com.nietott.portfolio.model.Users;
@@ -44,11 +45,22 @@ public class PortfolioService implements IPortfolioService{
         if (!userRepository.existsById(user.getUserId())){
             return false;
         } else {
-            Users persoEditada = new Users(user.getUserId() , user.getName(), user.getEmail(), user.getPassword(),user.getPhone(),user.getGitUsername(),user.getLinkedinUsername(),user.getDni(),user.getSurname(),user.getImageUrl(),user.getBannerUrl());
+            Users persoEditada = new Users(user.getUserId(), 
+            user.getName(), 
+            user.getEmail(), 
+            user.getPassword(),
+            user.getPhone(),
+            user.getGitUsername(),
+            user.getLinkedinUsername(),
+            user.getDni(),
+            user.getSurname(),
+            user.getImageUrl(),
+            user.getBannerUrl());
             userRepository.save(persoEditada);
             return true;
         }
     }
+    
     @Override
     public PortfolioDTO getPortfolio() {
          // recupera los datos desde la persistencia
@@ -57,10 +69,12 @@ public class PortfolioService implements IPortfolioService{
          List<experienceDTO> listExpeDto = this.listExpeDto();
          List<skillsDTO> listSkillDto = this.listSkillsDTO();
          List<softskillsDTO> listSoftDto = this.listSoftDTO();
+         List<projectsDTO> listProjectsDTO = this.listProjectsDTO();
          List<certificationsDTO> listCertDto = this.listCertificationsDTO();
          
          // asigna los datos recuperados al portfolio
          PortfolioDTO portfolio = new PortfolioDTO();
+         
          //datos de persona
          portfolio.setUser(userDTO);
          //listas de secciones
@@ -68,6 +82,7 @@ public class PortfolioService implements IPortfolioService{
          portfolio.setExperience(listExpeDto);
          portfolio.setSkill(listSkillDto);
          portfolio.setSoft(listSoftDto);
+         portfolio.setProject(listProjectsDTO);
          portfolio.setCertifications(listCertDto);
  
          // entrega portfolio
@@ -82,7 +97,17 @@ public class PortfolioService implements IPortfolioService{
     @Override
     public userDTO getUserDTO() {
         Users user = this.getUser();
-        userDTO userDto = new userDTO(user.getUserId() , user.getName(), user.getEmail(), user.getPassword(),user.getPhone(),user.getGitUsername(),user.getLinkedinUsername(),user.getDni(),user.getSurname(),user.getImageUrl(),user.getBannerUrl());
+        userDTO userDto = new userDTO(user.getUserId() ,
+         user.getName(),
+         user.getEmail(),
+         user.getPassword(),
+        user.getPhone(),
+        user.getGitUsername(),
+        user.getLinkedinUsername(),
+        user.getDni(),
+        user.getSurname(),
+        user.getImageUrl(),
+        user.getBannerUrl());
         return userDto;
     }
     @Override
@@ -91,7 +116,14 @@ public class PortfolioService implements IPortfolioService{
         List<educationDTO> listEduDto = new ArrayList<educationDTO>();
         
         for (Education edu : listEdu) {
-            educationDTO eduDto = new educationDTO(edu.getEduId(), edu.getUsers().getUserId(), edu.getInstitutionName(), edu.getDegreeName(), edu.getFieldOfStudy(), edu.getStartDate(), edu.getEndDate(), edu.getImageUrl());
+            educationDTO eduDto = new educationDTO(edu.getEduId(),
+             edu.getUsers().getUserId(),
+             edu.getInstitutionName(),
+             edu.getDegreeName(),
+             edu.getFieldOfStudy(),
+             edu.getStartDate(),
+             edu.getEndDate(),
+             edu.getImageUrl());
             listEduDto.add(eduDto);
         }
 
@@ -103,18 +135,39 @@ public class PortfolioService implements IPortfolioService{
         List<experienceDTO> listExpeDto = new ArrayList<>();
 
         for (Experience expe : listExpe) {
-            experienceDTO expeDto = new experienceDTO(expe.getExpId(), expe.getUsers().getUserId(), expe.getCompanyName(), expe.getJobTitle(), expe.getStartDate(), expe.getEndDate(), expe.getJobDescription(), expe.getImageUrl());
+            experienceDTO expeDto = new experienceDTO(expe.getExpId(),
+             expe.getUsers().getUserId(),
+             expe.getCompanyName(),
+             expe.getJobTitle(),
+             expe.getStartDate(),
+             expe.getEndDate(),
+             expe.getJobDescription(),
+             expe.getImageUrl());
             listExpeDto.add(expeDto);
         }
 
         return listExpeDto;
     }
 
-    /*@Override
+    @Override
     public List<projectsDTO> listProjectsDTO() {
-        
-        return null;
-    }*/
+        List<Projects> projectList = projectsRepository.findAll();
+        List<projectsDTO> projectDTOList = new ArrayList<>();
+    
+        for (Projects project : projectList) {
+            projectsDTO projectDTO = new projectsDTO(project.getProjectId(),
+             project.getUsers().getUserId(),
+             project.getTitle(),
+             project.getDescription(),
+             project.getStartDate(),
+             project.getEndDate(),
+             project.getLiveUrl(),
+             project.getImageUrl());
+            projectDTOList.add(projectDTO);
+        }
+    
+        return projectDTOList;
+    }
 
     @Override
     public List<certificationsDTO> listCertificationsDTO() {
@@ -122,7 +175,13 @@ public class PortfolioService implements IPortfolioService{
         List<certificationsDTO> listcertificationsDTO = new ArrayList<>();
         
         for (Certifications skills : listCertifications) {
-            certificationsDTO certificationsDTO = new certificationsDTO(skills.getCertId(), skills.getUsers().getUserId(), skills.getCertificationName(), skills.getInstitutionName(), skills.getDateObtained(), skills.getCertificationUrl(), skills.getImageUrl());
+            certificationsDTO certificationsDTO = new certificationsDTO(skills.getCertId(),
+             skills.getUsers().getUserId(),
+             skills.getCertificationName(),
+             skills.getInstitutionName(),
+             skills.getDateObtained(),
+             skills.getCertificationUrl(),
+             skills.getImageUrl());
             listcertificationsDTO.add(certificationsDTO);
         }
 
@@ -135,7 +194,11 @@ public class PortfolioService implements IPortfolioService{
         List<skillsDTO> listSkillsDto = new ArrayList<>();
 
         for (Skills skills : listSkills) {
-            skillsDTO skillsDto = new skillsDTO(skills.getSkillId(), skills.getUsers().getUserId(), skills.getProficiencyLevel(), skills.getSkillName(), skills.getIcon());
+            skillsDTO skillsDto = new skillsDTO(skills.getSkillId(),
+             skills.getUsers().getUserId(),
+             skills.getProficiencyLevel(),
+             skills.getSkillName(),
+             skills.getIcon());
             listSkillsDto.add(skillsDto);
         }
 
@@ -148,7 +211,11 @@ public class PortfolioService implements IPortfolioService{
         List<softskillsDTO> listSoftskillsDTO = new ArrayList<>();
 
         for (SoftSkills soft:listSoft) {
-            softskillsDTO softskillsDTO = new softskillsDTO(soft.getSoftId(), soft.getUsers().getUserId(), soft.getSkillName(), soft.getIcon());
+            softskillsDTO softskillsDTO = new softskillsDTO(soft.getSoftId(), 
+            soft.getUsers().getUserId(), 
+            soft.getSkillName(), 
+            soft.getIcon());
+            
             listSoftskillsDTO.add(softskillsDTO);
         }
 

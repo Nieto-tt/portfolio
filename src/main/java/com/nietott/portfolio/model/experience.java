@@ -1,7 +1,7 @@
 package com.nietott.portfolio.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -32,6 +32,6 @@ public class Experience implements Serializable {
     private Date endDate;
     private String jobDescription;
     private String imageUrl;
-
+    
     public Experience(){}
 }

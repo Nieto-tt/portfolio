@@ -29,7 +29,7 @@ public interface IPortfolioService {
     
     public List<softskillsDTO> listSoftDTO();
     
-   // public List<projectsDTO> listProjectsDTO();
+    public List<projectsDTO> listProjectsDTO();
 
     public List<certificationsDTO> listCertificationsDTO();
    

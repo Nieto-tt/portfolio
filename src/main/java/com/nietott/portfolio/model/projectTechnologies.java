@@ -22,7 +22,7 @@ public class projectTechnologies {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
+/* 
     @ManyToMany
     @JoinTable(name = "project_technologies",
             joinColumns = @JoinColumn(name = "technology_id"),
@@ -34,4 +34,5 @@ public class projectTechnologies {
             joinColumns = @JoinColumn(name = "project_id"),
             inverseJoinColumns = @JoinColumn(name = "technology_id"))
     private List<Technologies> technologies;
+    */
 }

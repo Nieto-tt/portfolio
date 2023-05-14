@@ -1,36 +1,50 @@
 package com.nietott.portfolio.service;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nietott.portfolio.DTO.skillsDTO;
 import com.nietott.portfolio.model.Skills;
+import com.nietott.portfolio.model.Users;
 import com.nietott.portfolio.repository.SkillRepository;
+import com.nietott.portfolio.repository.UserRepository;
 
 @Service
 public class SkillsService implements ISkillsService {
-
-    @Autowired 
-    public SkillRepository repository;
+    
+    @Autowired public SkillRepository skillRepository;
+    @Autowired public UserRepository userRepository;
 
     @Override
-    public void deleteSkills(Long id) {
-        repository.deleteById(id);
+    public void deleteSkill(Long id) {
+        skillRepository.deleteById(id);
     }
 
     @Override
-    public Skills findSkills(Long id) {
-        return repository.findById(id).orElse(null);
+    public boolean editSkill(Long id, skillsDTO skill) {
+        if (!skillRepository.existsById(id)) {
+            return false;
+        } else {
+            Skills SkillEdited = skillRepository.findById(id).orElse(null);
+            SkillEdited.setUsers(userRepository.findById(skill.getUserId()).orElse(null));
+            SkillEdited.setSkillName(skill.getSkillName());
+            SkillEdited.setSkillName(skill.getProficiencyLevel());
+            SkillEdited.setIcon(skill.getIcon());
+            skillRepository.save(SkillEdited);
+            return true;
+        }
     }
 
     @Override
-    public List<Skills> getSkills() {
-        return repository.findAll();
-    }
-
-    @Override
-    public void newSkills(Skills skills) {
-        repository.save(skills);
+    public void newSkill(skillsDTO skill) {
+        Users user = userRepository.findById(skill.getUserId()).orElse(null);
+        Skills newskill = new Skills(
+            skill.getSkillId(),
+            user, 
+            skill.getSkillName(), 
+            skill.getProficiencyLevel(), 
+            skill.getIcon());
+        skillRepository.save(newskill);  
     }
     
 }

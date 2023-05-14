@@ -1,14 +1,11 @@
 package com.nietott.portfolio.service;
 
-import java.util.List;
-import com.nietott.portfolio.model.SoftSkills;
+import com.nietott.portfolio.DTO.softskillsDTO;
 
 public interface ISoftSkillsService {
-    public List<SoftSkills> getSoftSkills();
+    public void newSoftSkill(softskillsDTO edu);
     
-    public void newSoftSkills(SoftSkills softskills);
-
-    public void deleteSoftSkills(Long id);
-
-    public SoftSkills findSoftSkills(Long id);
+    public boolean editSoftSkill(Long id, softskillsDTO edu);
+    
+    public void deleteSoftSkill(Long id);
 }

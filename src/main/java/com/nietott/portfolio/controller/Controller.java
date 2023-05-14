@@ -1,14 +1,18 @@
 package com.nietott.portfolio.controller;
 
 import com.nietott.portfolio.DTO.PortfolioDTO;
-import com.nietott.portfolio.model.SoftSkills;
-import com.nietott.portfolio.model.Users;
+import com.nietott.portfolio.DTO.certificationsDTO;
+import com.nietott.portfolio.DTO.educationDTO;
+import com.nietott.portfolio.DTO.experienceDTO;
+import com.nietott.portfolio.DTO.projectsDTO;
+import com.nietott.portfolio.DTO.skillsDTO;
+import com.nietott.portfolio.DTO.softskillsDTO;
+import com.nietott.portfolio.DTO.userDTO;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -29,11 +33,14 @@ import com.nietott.portfolio.service.IPortfolioService;
 import com.nietott.portfolio.service.IProjectService;
 import com.nietott.portfolio.service.ISkillsService;
 import com.nietott.portfolio.service.ISoftSkillsService;
+import com.nietott.portfolio.service.ITechnologiesService;
 import com.nietott.portfolio.service.IUserService;
 
 @RestController
 //@CrossOrigin
 public class Controller {
+
+    @Autowired private ITechnologiesService technoService ;
     @Autowired private IUserService userService;
     @Autowired private ISkillsService skillService;
     @Autowired private ISoftSkillsService softService;
@@ -50,22 +57,160 @@ public class Controller {
         return new ResponseEntity<>(portfolio, HttpStatus.OK);
     }
 
+    @PutMapping ("/editUser")
+    public ResponseEntity<?> editUser(@RequestBody userDTO user) {
+        if (!portfolioService.editUser(user)){
+            return new ResponseEntity<String>("El usuario No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+
+    @PostMapping ("/newProject")
+    public ResponseEntity<?> newProject(@RequestBody projectsDTO project){
+        projectService.newProject(project);
+        return new ResponseEntity<String>("Proyecto "+project.getTitle()+" creado exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteProject/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteProject(@PathVariable Long id){
+        projectService.deleteProject(id);
+        return new ResponseEntity<String>("Proyecto borrado Exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editProject/{id}")
+    public ResponseEntity<?> editProject(@PathVariable Long id, @RequestBody projectsDTO project){
+        if (!projectService.editProject(id, project)){
+            return new ResponseEntity<String>("El Proyecto No Existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+project.getTitle()+" Cambiada Exitosamente!!", HttpStatus.OK);
+    }
+
+    @GetMapping ("/countProjects")
+    public ResponseEntity<?> countProjects(){
+        long count = projectService.countProjects();
+        return new ResponseEntity<String>("La cantidad de Proyectos es de " + count, HttpStatus.OK);
+    }
+
+    //
+
+    @PostMapping ("/newSoftSkill")
+    public ResponseEntity<?> newSoftSkill(@RequestBody softskillsDTO softSkill){
+        softService.newSoftSkill(softSkill);
+        return new ResponseEntity<String>("Habilidad  "+softSkill.getSkillName()+" Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteSoftSkill/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteSoftSkill(@PathVariable Long id){
+        softService.deleteSoftSkill(id);
+        return new ResponseEntity<String>("Habilidad Borrada Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editSoftSkill/{id}")
+    public ResponseEntity<?> editSoftSkill(@PathVariable Long id, @RequestBody softskillsDTO softSkill){
+        if (!softService.editSoftSkill(id, softSkill)){
+            return new ResponseEntity<String>("La habilidad No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ softSkill.getSkillName()+"cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+
+    @PostMapping ("/newSkill")
+    public ResponseEntity<?> newSkill(@RequestBody skillsDTO Skill){
+        skillService.newSkill(Skill);
+        return new ResponseEntity<String>("Habilidad  "+Skill.getSkillName()+" Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteSkill/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteSkill(@PathVariable Long id){
+        skillService.deleteSkill(id);
+        return new ResponseEntity<String>("Habilidad Borrada Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editSkill/{id}")
+    public ResponseEntity<?> editSkill(@PathVariable Long id, @RequestBody skillsDTO Skill){
+        if (!skillService.editSkill(id, Skill)){
+            return new ResponseEntity<String>("La habilidad No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ Skill.getSkillName()+"cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+
+    @PostMapping ("/newSkill")
+    public ResponseEntity<?> newCertification(@RequestBody certificationsDTO certification){
+        certService.newCertification(certification);
+        return new ResponseEntity<String>("La certificación: "+ certification.getCertificationName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteCertification/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteCertification(@PathVariable Long id){
+        certService.deleteCertification(id);
+        return new ResponseEntity<String>("Certificado Borrado Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editCertification/{id}")
+    public ResponseEntity<?> editCertification(@PathVariable Long id, @RequestBody certificationsDTO certification){
+        if (!certService.editCertification(id, certification)){
+            return new ResponseEntity<String>("El Certficado No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ certification.getCertificationName()+" cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+
+    @PostMapping ("/newEducation")
+    public ResponseEntity<?> newEducation(@RequestBody educationDTO education){
+        eduService.newEducation(education);
+        return new ResponseEntity<String>(education.getInstitutionName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteEducation/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteEducation(@PathVariable Long id){
+        eduService.deleteEducation(id);
+        return new ResponseEntity<String>("Educacion Borrado Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editEducation/{id}")
+    public ResponseEntity<?> editEducation(@PathVariable Long id, @RequestBody educationDTO education){
+        if (!eduService.editEducation(id, education)){
+            return new ResponseEntity<String>("La Educacion No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ education.getInstitutionName()+" fue cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+    @PostMapping ("/newExperience")
+    public ResponseEntity<?> newExperience(@RequestBody experienceDTO experience){
+        expeService.newExperience(experience);
+        return new ResponseEntity<String>(experience.getCompanyName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteExperience/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteExperience(@PathVariable Long id){
+        expeService.deleteExperience(id);
+        return new ResponseEntity<String>("Experiencia Borrada Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editExperience/{id}")
+    public ResponseEntity<?> editExperience(@PathVariable Long id, @RequestBody experienceDTO experience){
+        if (!expeService.editExperience(id, experience)){
+            return new ResponseEntity<String>("La Educacion No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ experience.getCompanyName()+" fue cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
+
     /* 
-    @PostMapping("/newSoft")
-    public void newSoftSkills(@RequestBody SoftSkills SoftSkills){
-        softService.newSoftSkills(SoftSkills);
-    }
-
-    @GetMapping("/get")
-    public List<SoftSkills> getSkills(){
-        return softService.getSoftSkills();
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deleteSkills(@PathVariable Long id){
-        softService.deleteSoftSkills(id);
-    }
- 
     @GetMapping("/login/{email}/{password}")
     public ResponseEntity<String> login(@PathVariable String email, @PathVariable String password) {
         

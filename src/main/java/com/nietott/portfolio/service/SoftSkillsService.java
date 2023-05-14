@@ -1,37 +1,49 @@
 package com.nietott.portfolio.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.nietott.portfolio.DTO.softskillsDTO;
 import com.nietott.portfolio.model.SoftSkills;
+import com.nietott.portfolio.model.Users;
 import com.nietott.portfolio.repository.SoftSkillsRepository;
+import com.nietott.portfolio.repository.UserRepository;
 
 @Service
 public class SoftSkillsService implements ISoftSkillsService {
 
-    @Autowired
-    public SoftSkillsRepository repository;
+    @Autowired public SoftSkillsRepository softRepository;
+    @Autowired public UserRepository userRepository;
 
     @Override
-    public void deleteSoftSkills(Long id) {
-        repository.deleteById(id);
+    public void deleteSoftSkill(Long id) {
+        softRepository.deleteById(id);
     }
 
     @Override
-    public SoftSkills findSoftSkills(Long id) {
-        return repository.findById(id).orElse(null);
+    public boolean editSoftSkill(Long id, softskillsDTO softSkill) {
+        if (!softRepository.existsById(id)) {
+            return false;
+        } else {
+            SoftSkills softSkillEdited = softRepository.findById(id).orElse(null);
+            softSkillEdited.setUsers(userRepository.findById(softSkill.getUserId()).orElse(null));
+            softSkillEdited.setSkillName(softSkill.getSkillName());
+            softSkillEdited.setIcon(softSkill.getIcon());
+            softRepository.save(softSkillEdited);
+            return true;
+        }
     }
 
     @Override
-    public List<SoftSkills> getSoftSkills() {
-        return repository.findAll();
+    public void newSoftSkill(softskillsDTO softSkill) {
+        Users user = userRepository.findById(softSkill.getUserId()).orElse(null);
+        SoftSkills newsoftSkill = new SoftSkills(
+            softSkill.getSoftId(),
+            user, 
+            softSkill.getSkillName(), 
+            softSkill.getIcon());
+        softRepository.save(newsoftSkill);  
     }
-
-    @Override
-    public void newSoftSkills(SoftSkills softskills) {
-        repository.save(softskills);
-    }
+    
     
 }
