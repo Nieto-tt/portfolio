@@ -13,7 +13,6 @@ public class userDTO {
     private String phone;
     private String gitUsername;
     private String linkedinUsername;
-    private int dni;
     private String surname;
     private String imageUrl;
     private String bannerUrl;

@@ -26,11 +26,11 @@ public class Users {
     private String phone;
     private String gitUsername;
     private String linkedinUsername;
-    private int dni;
     private String surname;
     private String imageUrl;
+
     public Users(Long userId, String name, @Email String email, String password, String phone, String gitUsername,
-            String linkedinUsername, int dni, String surname, String imageUrl, String bannerUrl) {
+            String linkedinUsername, String surname, String imageUrl, String bannerUrl) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -38,7 +38,6 @@ public class Users {
         this.phone = phone;
         this.gitUsername = gitUsername;
         this.linkedinUsername = linkedinUsername;
-        this.dni = dni;
         this.surname = surname;
         this.imageUrl = imageUrl;
         this.bannerUrl = bannerUrl;

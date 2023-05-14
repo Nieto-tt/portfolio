@@ -52,7 +52,6 @@ public class PortfolioService implements IPortfolioService{
             user.getPhone(),
             user.getGitUsername(),
             user.getLinkedinUsername(),
-            user.getDni(),
             user.getSurname(),
             user.getImageUrl(),
             user.getBannerUrl());
@@ -104,7 +103,6 @@ public class PortfolioService implements IPortfolioService{
         user.getPhone(),
         user.getGitUsername(),
         user.getLinkedinUsername(),
-        user.getDni(),
         user.getSurname(),
         user.getImageUrl(),
         user.getBannerUrl());
