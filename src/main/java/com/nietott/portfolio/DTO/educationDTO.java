@@ -13,8 +13,8 @@ public class educationDTO {
     private String institutionName;
     private String degreeName;
     private String fieldOfStudy;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String imageUrl;
 
     public educationDTO(){}

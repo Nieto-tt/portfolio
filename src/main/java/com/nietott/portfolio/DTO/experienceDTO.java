@@ -13,8 +13,8 @@ public class experienceDTO {
     private Long userId;
     private String companyName;
     private String jobTitle;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String jobDescription;
     private String imageUrl;
 
