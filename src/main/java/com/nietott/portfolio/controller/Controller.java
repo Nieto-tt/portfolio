@@ -7,6 +7,7 @@ import com.nietott.portfolio.DTO.experienceDTO;
 import com.nietott.portfolio.DTO.projectsDTO;
 import com.nietott.portfolio.DTO.skillsDTO;
 import com.nietott.portfolio.DTO.softskillsDTO;
+import com.nietott.portfolio.DTO.technologiesDTO;
 import com.nietott.portfolio.DTO.userDTO;
 
 import org.springframework.http.HttpStatus;
@@ -142,7 +143,7 @@ public class Controller {
 
     //
 
-    @PostMapping ("/newSkill")
+    @PostMapping ("/newCertification")
     public ResponseEntity<?> newCertification(@RequestBody certificationsDTO certification){
         certService.newCertification(certification);
         return new ResponseEntity<String>("La certificación: "+ certification.getCertificationName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
@@ -210,6 +211,28 @@ public class Controller {
 
     //
 
+    @PostMapping ("/newTechnologies")
+    public ResponseEntity<?> newTechnologies(@RequestBody technologiesDTO techno){
+        technoService.newTechnologies(techno);
+        return new ResponseEntity<String>(techno.getName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
+    }
+    
+    @DeleteMapping ("/deleteTechnologies/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public ResponseEntity<?> deleteTechnologies(@PathVariable Long id){
+        technoService.deleteTechnologies(id);
+        return new ResponseEntity<String>("Lenguaje Borrada Exitosamente ", HttpStatus.CREATED);
+    }
+    
+    @PutMapping ("/editTechnologies/{id}")
+    public ResponseEntity<?> editTechnologies(@PathVariable Long id, @RequestBody technologiesDTO techno){
+        if (!technoService.editTechnologies(id, techno)){
+            return new ResponseEntity<String>("La Educacion No existe", HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<String>("Informacion de "+ techno.getName()+" fue cambiada Exitosamente", HttpStatus.OK);
+    }
+
+    //
     /* 
     @GetMapping("/login/{email}/{password}")
     public ResponseEntity<String> login(@PathVariable String email, @PathVariable String password) {

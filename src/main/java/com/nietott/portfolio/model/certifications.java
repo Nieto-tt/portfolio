@@ -1,7 +1,6 @@
 package com.nietott.portfolio.model;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -28,7 +27,7 @@ public class Certifications implements Serializable{
 
     private String certificationName;
     private String institutionName;
-    private Date dateObtained;
+    private String dateObtained;
     private String certificationUrl;
     private String imageUrl;
 

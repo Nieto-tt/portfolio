@@ -28,8 +28,8 @@ public class Projects implements Serializable{
 
     private String title;
     private String description;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String imageUrl;
     private String liveUrl;
 

@@ -28,8 +28,8 @@ public class Experience implements Serializable {
 
     private String companyName;
     private String jobTitle;
-    private Date startDate;
-    private Date endDate;
+    private String startDate;
+    private String endDate;
     private String jobDescription;
     private String imageUrl;
     

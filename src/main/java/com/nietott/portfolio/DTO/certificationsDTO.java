@@ -12,7 +12,7 @@ public class certificationsDTO {
     private Long userId;
     private String certificationName;
     private String institutionName;
-    private Date dateObtained;
+    private String dateObtained;
     private String certificationUrl;
     private String imageUrl;
 
