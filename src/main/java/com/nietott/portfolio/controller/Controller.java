@@ -9,6 +9,7 @@ import com.nietott.portfolio.DTO.skillsDTO;
 import com.nietott.portfolio.DTO.softskillsDTO;
 import com.nietott.portfolio.DTO.technologiesDTO;
 import com.nietott.portfolio.DTO.userDTO;
+import com.nietott.portfolio.model.Users;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -38,7 +39,7 @@ import com.nietott.portfolio.service.ITechnologiesService;
 import com.nietott.portfolio.service.IUserService;
 
 @RestController
-//@CrossOrigin
+@CrossOrigin (origins = "http://localhost:4200/", maxAge = 3600)
 public class Controller {
 
     @Autowired private ITechnologiesService technoService ;
@@ -92,7 +93,7 @@ public class Controller {
     @GetMapping ("/countProjects")
     public ResponseEntity<?> countProjects(){
         long count = projectService.countProjects();
-        return new ResponseEntity<String>("La cantidad de Proyectos es de " + count, HttpStatus.OK);
+        return new ResponseEntity<String>("Cant Proyectos:" + count, HttpStatus.OK);
     }
 
     //
@@ -232,10 +233,9 @@ public class Controller {
         return new ResponseEntity<String>("Informacion de "+ techno.getName()+" fue cambiada Exitosamente", HttpStatus.OK);
     }
 
-    //
-    /* 
-    @GetMapping("/login/{email}/{password}")
-    public ResponseEntity<String> login(@PathVariable String email, @PathVariable String password) {
+
+    @PostMapping("/login")
+    public ResponseEntity<String> login(@RequestBody String email, @RequestBody String password) {
         
         // Verificar si el usuario existe en la base de datos
         Users user = userService.findByEmail(email);
@@ -251,6 +251,6 @@ public class Controller {
         // Si el usuario y la contraseña son correctos, se puede iniciar sesión
         return ResponseEntity.ok("Inicio de sesión exitoso");
     }
-    */
+    
 
 }
