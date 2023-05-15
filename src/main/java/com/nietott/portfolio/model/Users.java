@@ -28,9 +28,12 @@ public class Users {
     private String linkedinUsername;
     private String surname;
     private String imageUrl;
+    private String bannerUrl;
+    private String description;
+    private String ocupation;
 
     public Users(Long userId, String name, @Email String email, String password, String phone, String gitUsername,
-            String linkedinUsername, String surname, String imageUrl, String bannerUrl) {
+            String linkedinUsername, String surname, String imageUrl, String bannerUrl, String description, String ocupation) {
         this.userId = userId;
         this.name = name;
         this.email = email;
@@ -41,9 +44,11 @@ public class Users {
         this.surname = surname;
         this.imageUrl = imageUrl;
         this.bannerUrl = bannerUrl;
+        this.description = description;
+        this.ocupation = ocupation;
     }
 
-    private String bannerUrl;
+    
     
 
     @OneToMany(mappedBy = "users"/* ,cascade = CascadeType.ALL, orphanRemoval = true*/)

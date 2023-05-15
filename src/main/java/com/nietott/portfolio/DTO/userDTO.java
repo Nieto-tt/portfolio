@@ -16,6 +16,8 @@ public class userDTO {
     private String surname;
     private String imageUrl;
     private String bannerUrl;
+    private String description;
+    private String ocupation;
 
     public userDTO(){}
 }

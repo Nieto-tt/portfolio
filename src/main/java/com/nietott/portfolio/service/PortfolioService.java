@@ -54,7 +54,9 @@ public class PortfolioService implements IPortfolioService{
             user.getLinkedinUsername(),
             user.getSurname(),
             user.getImageUrl(),
-            user.getBannerUrl());
+            user.getBannerUrl(),
+            user.getOcupation(),
+            user.getDescription());
             userRepository.save(persoEditada);
             return true;
         }
@@ -105,7 +107,9 @@ public class PortfolioService implements IPortfolioService{
         user.getLinkedinUsername(),
         user.getSurname(),
         user.getImageUrl(),
-        user.getBannerUrl());
+        user.getBannerUrl(),
+        user.getOcupation(),
+        user.getDescription());
         return userDto;
     }
     @Override
@@ -159,8 +163,8 @@ public class PortfolioService implements IPortfolioService{
              project.getDescription(),
              project.getStartDate(),
              project.getEndDate(),
-             project.getLiveUrl(),
-             project.getImageUrl());
+             project.getImageUrl(),
+             project.getLiveUrl());
             projectDTOList.add(projectDTO);
         }
     
@@ -194,8 +198,8 @@ public class PortfolioService implements IPortfolioService{
         for (Skills skills : listSkills) {
             skillsDTO skillsDto = new skillsDTO(skills.getSkillId(),
              skills.getUsers().getUserId(),
-             skills.getProficiencyLevel(),
              skills.getSkillName(),
+             skills.getProficiencyLevel(),
              skills.getIcon());
             listSkillsDto.add(skillsDto);
         }
