@@ -39,7 +39,7 @@ import com.nietott.portfolio.service.ITechnologiesService;
 import com.nietott.portfolio.service.IUserService;
 
 @RestController
-@CrossOrigin (origins = "http://localhost:4200/", maxAge = 3600)
+@CrossOrigin (origins = "https://portfolio-nietotomas.web.app/", maxAge = 3600)
 public class Controller {
 
     @Autowired private ITechnologiesService technoService ;

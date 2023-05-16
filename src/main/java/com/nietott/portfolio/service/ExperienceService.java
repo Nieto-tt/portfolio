@@ -44,7 +44,6 @@ public class ExperienceService implements IExperienceService{
     public void newExperience(experienceDTO experience) {
         Users users = userRepository.findById(experience.getUserId()).orElse(null);
         Experience newExperience = new Experience(
-                experience.getExpId(),
                 users,
                 experience.getCompanyName(),
                 experience.getJobTitle(),

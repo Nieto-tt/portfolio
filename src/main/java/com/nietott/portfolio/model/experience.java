@@ -34,4 +34,17 @@ public class Experience implements Serializable {
     private String imageUrl;
     
     public Experience(){}
+
+    public Experience(Users users, String companyName, String jobTitle, String startDate, String endDate,
+            String jobDescription, String imageUrl) {
+        this.users = users;
+        this.companyName = companyName;
+        this.jobTitle = jobTitle;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.jobDescription = jobDescription;
+        this.imageUrl = imageUrl;
+    }
+
+    
 }

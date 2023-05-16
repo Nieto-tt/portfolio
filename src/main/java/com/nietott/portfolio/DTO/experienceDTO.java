@@ -19,4 +19,17 @@ public class experienceDTO {
     private String imageUrl;
 
     public experienceDTO(){}
+
+    public experienceDTO(Long userId, String companyName, String jobTitle, String startDate, String endDate,
+            String jobDescription, String imageUrl) {
+        this.userId = userId;
+        this.companyName = companyName;
+        this.jobTitle = jobTitle;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.jobDescription = jobDescription;
+        this.imageUrl = imageUrl;
+    }
+
+    
 }
