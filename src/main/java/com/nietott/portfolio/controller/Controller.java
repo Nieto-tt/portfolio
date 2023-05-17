@@ -233,6 +233,11 @@ public class Controller {
         return new ResponseEntity<String>("Informacion de "+ techno.getName()+" fue cambiada Exitosamente", HttpStatus.OK);
     }
 
+    @PostMapping("/newUser")
+    public ResponseEntity<?> newUser(@RequestBody Users user){
+        userService.newUser(user);
+        return new ResponseEntity<String>(user.getName()+" fue Añadida exitosamente!!", HttpStatus.CREATED);
+    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody String email, @RequestBody String password) {

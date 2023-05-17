@@ -16,12 +16,13 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 @Entity
-@Table(name = "project_technology")
 public class projectTechnologies {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    public projectTechnologies(){}
 /* 
     @ManyToMany
     @JoinTable(name = "project_technologies",
