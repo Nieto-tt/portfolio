@@ -1,6 +1,6 @@
-FROM amazoncorretto:17
+FROM amazoncorretto:17-alpine-jdk
 
-LABEL  MAINTAINER TomasNieto
+MAINTAINER TomasNieto
 
 COPY portfolio.jar portfolio.jar
 
